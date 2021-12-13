@@ -1,0 +1,75 @@
+{% extends "admin_layout.html" %}
+
+{% block nav %}
+<li class="nav-item">
+  <a class="btn btn-primary" href="/dashbord">Dashboard</a>
+</li>
+<li class="nav-item active">
+  <a class="nav-link" href="#">Messages<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+  <a class="btn btn-danger" href="/logout">Logout</a>
+</li>
+{% endblock nav %}
+
+{% block body %}
+<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Admin Panel</h1>
+          <span class="subheading">Manage your posts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <br>
+
+      {% for msg in msgs %}
+      <div class="post-preview">
+        <h2 class="post-title">
+          {{msg.name}}
+        </h2>
+        <p class="post-meta">Sent by
+          on {{msg.date}}</p>
+      </div>
+      {{msg.message}}...
+
+      <br>
+      <br>
+      <td><a href="/msg/delete/{{msg.sno}}"><button
+            class="btn btn-danger rounded-lg border border-dark ml-3">Delete</button></td>
+      </tr>
+      <hr>
+      {% endfor %}
+
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock body %}

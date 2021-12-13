@@ -1,0 +1,11 @@
+flask
+flask_sqlalchemy
+flask_wtf
+flask_ngrok_st
+flask_bcrypt
+Jinja2
+email_validator
+click
+itsdangerous
+Werkzeug
+unidecode

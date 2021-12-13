@@ -1,0 +1,88 @@
+{% extends "admin_layout.html" %}
+
+{% block nav %}
+<li class="nav-item">
+  <a class="btn btn-primary" href="/dashbord">Dashboard</a>
+</li>
+<li class="nav-item active">
+  <a class="nav-link" href="#">Edit<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+  <a class="btn btn-danger ml-1" href="/logout">Logout</a>
+</li>
+{% endblock nav %}
+
+{% block body %}
+<header class="masthead" style="background-image: url('https://github.com/jakbin/blog/raw/main/contact-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Admin Panel</h1>
+          <span class="subheading">Manage your posts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <p></p>
+      <form name="sentMessage" id="contactForm" action="/edit/{{sno}}" method="post" novalidate>
+        <div class="control-group">
+          <div class="form-group ">
+            <label>Title</label>
+            <input type="text" class="form-control" placeholder="Title" id="title" name='title' required
+              value="{{post.title}}">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group col-xs-12 ">
+            <label>Slug</label>
+            <input type="text" class="form-control" placeholder="Slug" name="slug" id="slug" required
+              value="{{post.slug}}">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="form-group ">
+            <label>content</label>
+            <textarea rows="5" class="form-control" placeholder="Content" name="content" id="content"
+              required>{{post.content}}</textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success rounded-lg border-dark" id="sendMessageButton">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<hr>
+{% endblock body %}

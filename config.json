@@ -1,0 +1,18 @@
+{
+    "params":
+    {
+      "local_uri":"mysql://root:@localhost/pyblog?unix_socket=/opt/lampp/var/mysql/mysql.sock",
+      "sqlite_uri":"sqlite:///pyblog.db",
+      "fb_url":"https://facebook.com/devil",
+      "tw_url":"https://twitter.com/devil",
+      "gh_url":"https://github.com/jakbin",
+      "blog_name":"Devil Blog",
+      "gmail_user": "",
+      "gmail_pass": "",
+      "no_of_posts":2,
+      "writer":"Devil",
+      "upload_location":"imgupload"
+
+    }
+ 
+ }

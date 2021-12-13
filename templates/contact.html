@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home </a>
+      </li>
+      <!-- <li class="nav-item">
+            <a class="nav-link" href="/blog">Blog</a>
+      </li> -->
+      <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item active">
+            <a class="nav-link" href="#">Contact<span class="sr-only">(current)</span></a>
+    </li>
+{% endblock nav %}
+
+{% block body %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://github.com/jakbin/blog/raw/main/contact-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Contact Me</h1>
+            <span class="subheading">Have questions? I have answers.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+        <form name="sentMessage" id="contactForm" action="/contact" method="POST" novalidate>
+          {{ form.hidden_tag() }}
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Name</label>
+              {{ form.name(class="form-control",id="message",placeholder="Name") }}
+              {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                    <p class="help-block text-danger my-0">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Email Address</label>
+              {{ form.email(class="form-control",id="message",placeholder="Email Address") }}
+              {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <p class="help-block text-danger my-0">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Message</label>
+              {{ form.message(class="form-control",id="message",placeholder="Message") }}
+              {% if form.message.errors %}
+                {% for error in form.message.errors %}
+                    <p class="help-block text-danger my-0">{{ error }}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          {{ form.submit(class="btn btn-primary") }}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

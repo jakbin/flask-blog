@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+    <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- <li class="nav-item">
+            <a class="nav-link" href="/blog">Blog</a>
+      </li> -->
+      <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+    </li>
+{% endblock nav %}
+
+{% block body %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://github.com/jakbin/blog/raw/main/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{params['blog_name']}}</h1>
+            <span class="subheading">{{params['tagline']}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in posts %}    
+        <div class="post-preview">
+          <a href="/post/{{post.slug}}">
+            <h2 class="post-title">
+              {{post.title}}
+            </h2>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">{{params['writer']}}</a>
+            on {{post.date}}</p>
+        </div>
+        {{post.content[0:70]}}...
+        <hr>
+        {% endfor %}
+     
+        <!-- Pager -->
+            <nav aria-label="...">
+              <ul class="pagination">
+                <li class="page-item {% if (page == 1) %} disabled {% endif %}">
+                  <a class="page-link" href="{{prev}}">Previous</a>
+                </li>
+                {% for pagi in range(s_num, e_num) %}
+                  <li class="page-item {% if page == pagi %} active {% endif %}">
+                    <a class="page-link" href="/?page={{ pagi }}">
+                      {{ pagi }}
+                    <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                {% endfor %}
+                <li class="page-item {% if (last == page) %} disabled {% endif %}">
+                  <a class="page-link" href="{{next}}">Next</a>
+                </li>
+              </ul>
+            </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

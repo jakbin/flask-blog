@@ -1,0 +1,87 @@
+{% extends "admin_layout.html" %}
+
+{% block nav %}
+<li class="nav-item active">
+  <a class="nav-link" href="#">Dashboard<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="/msg">Messages</a>
+</li>
+<li class="nav-item">
+  <a class="btn btn-danger" href="/logout">Logout</a>
+</li>
+{% endblock nav %}
+
+{% block body %}
+<header class="masthead" style="background-image: url('https://github.com/jakbin/blog/raw/main/contact-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Admin Panel</h1>
+          <span class="subheading">Manage your posts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <h1>Add a new post</h1>
+      <a href="/edit/0"><button class="btn btn-info rounded-lg border-dark">Add a new post</button></a>
+      <hr>
+
+      <h1>Upload A file</h1>
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file1">
+        <button type="submit" class="btn btn-success rounded-lg border-dark">Submit</button>
+      </form>
+      <br>
+      <hr>
+      {% for post in posts %}
+      <div class="post-preview">
+        <a href="/post/{{post.slug}}">
+          <h2 class="post-title">
+            {{post.title}}
+          </h2>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">{{params['writer']}}</a>
+          on {{post.date}}
+        </p>
+      </div>
+      {{post.content[0:70]}}...
+      <br>
+      <br>
+      <td><a href="/edit/{{post.sno}}"><button class="btn btn-warning rounded-lg border border-dark">Edit</button></a>
+      </td>
+      <td><button class="btn btn-danger rounded-lg border border-dark ml-3">Delete</button></td>
+      </tr>
+      <hr>
+
+      {% endfor %}
+
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock body %}

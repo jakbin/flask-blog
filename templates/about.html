@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block css %} 
+<link rel="stylesheet" href="https://jakbin.github.io/blog/aboutf.css">
+{% endblock css %}
+
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home </a>
+      </li>
+      <!-- <li class="nav-item">
+            <a class="nav-link" href="/blog">Blog</a>
+      </li> -->
+      <li class="nav-item active">
+            <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact</a>
+    </li>
+{% endblock nav %}
+
+{% block body %}
+
+  <!-- Main Content -->
+    <div class="containr">
+        <div class="box">
+            <img src="https://github.com/jakbin/blog/raw/main/a.png" alt="">
+            <span></span>
+            <div class="content">
+                <h2>Dhruv Jagdish</h2>
+                <p>I am webdevloper. I am currently working on php.</p>
+                
+            </div>
+        </div>
+    </div>
+
+  {% endblock %}
+ 
