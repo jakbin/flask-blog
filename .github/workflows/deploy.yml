@@ -6,7 +6,7 @@ on:
       - "**.py"
       - "**.txt"
       - "**.html"
-      - ".github/workflows/Test.yml"
+      - ".github/workflows/deploy.yml"
 
 jobs:
   deploy:
