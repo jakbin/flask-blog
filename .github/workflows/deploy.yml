@@ -29,7 +29,7 @@ jobs:
     - name: Deploy to Heroku
       env:
         HEROKU_TOKEN: ${{ secrets.HEROKU_TOKEN }}
-      if: github.ref == 'refs/heads/master' && job.status == 'success'
+      if: github.ref == 'refs/heads/main' && job.status == 'success'
       run: |
         git remote add heroku https://heroku:$HEROKU_TOKEN@git.heroku.com/flask-bloging.git
         git push heroku HEAD:master -f
