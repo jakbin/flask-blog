@@ -1,6 +1,6 @@
 # A Blogging website using Flask Python
 
- [![Python application](https://github.com/jakbin/flask-blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/jakbin/flask-blog/actions/workflows/deploy.yml)
+ [![Deploy](https://github.com/jakbin/flask-blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/jakbin/flask-blog/actions/workflows/deploy.yml)
  ![GitHub Contributors](https://img.shields.io/github/contributors/jakbin/flask-blog)
  ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/jakbin/flask-blog)
  ![GitHub last commit](https://img.shields.io/github/last-commit/jakbin/flask-blog)
