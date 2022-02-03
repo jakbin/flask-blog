@@ -14,7 +14,6 @@ try:
 except Exception as e:
 	raise e
 
-
 if (password == c_password):
 	admin = Admin.query.filter_by(name=olduname).first()
 	print(admin)

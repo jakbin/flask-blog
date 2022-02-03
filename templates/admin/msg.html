@@ -1,4 +1,4 @@
-{% extends "admin_layout.html" %}
+{% extends "admin/layout.html" %}
 
 {% block nav %}
 <li class="nav-item">
@@ -13,7 +13,7 @@
 {% endblock nav %}
 
 {% block body %}
-<header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+<header class="masthead" style="background-image: url('https://github.com/jakbin/blog/raw/main/contact-bg.jpg')">
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
@@ -61,8 +61,8 @@
 
       <br>
       <br>
-      <td><a href="/msg/delete/{{msg.sno}}"><button
-            class="btn btn-danger rounded-lg border border-dark ml-3">Delete</button></td>
+      <td>
+        <button id='delete' class="btn btn-danger rounded-lg border border-dark ml-3" data-id='{{msg.sno}}'>Delete</button></td>
       </tr>
       <hr>
       {% endfor %}
@@ -73,3 +73,27 @@
 </div>
 </div>
 {% endblock body %}
+
+{% block js %}
+<script type="text/javascript">
+  $(document).ready(function(e){
+    $(document).on("click","#delete", function(e){
+      if (confirm("Are you sure you want to delete this message!")) {
+          var url = '/msg/delete/'
+          var num = $(this).data("id");
+          $.ajax({
+              url : url+num,
+              type : "GET",
+              success : function(data){
+                  if (data == 1) {
+                    location.reload();
+                  }else{
+                      alert("Can't Delete Record.");
+                  }
+              }
+          });
+      }
+    });
+  });
+</script>
+{% endblock js %}

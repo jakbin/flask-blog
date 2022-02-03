@@ -136,7 +136,8 @@ def delete(sno):
         current_ssession  = db.session.object_session(post)
         current_ssession.delete(post)
         current_ssession.commit()
-        flash('deleted successfully')
+        # flash('deleted successfully')
+        return '1'
     abort(403)
 
 @app.route("/edit/<string:sno>", methods = ['GET', 'POST'])
@@ -207,15 +208,15 @@ def msg():
     session['url'] = request.path
     return redirect('/login',code=401)
 
-@app.route("/msg/delete/<string:sno>", methods = ['GET', 'POST'])
+@app.route("/msg/delete/<string:sno>")
 def msgdelete(sno):
     if ('user' in session and session['user'] == (Admin.query.filter_by(name=session['user']).first()).name):
         msg = Msg.query.filter_by(sno=sno).first_or_404()
         current_ssession  = db.session.object_session(msg)
         current_ssession.delete(msg)
         current_ssession.commit()
-        flash('deleted successfully')
-        return redirect('/msg')
+        # flash('deleted successfully')
+        return '1'
     abort(403)  
     
 @app.errorhandler(404)
@@ -227,5 +228,5 @@ def error_500(error):
     return render_template('error/500.html'), 500     
 
 if __name__ == "__main__":
-    app.run()
-    # app.run(debug=True)
+    # app.run()
+    app.run(debug=True)
