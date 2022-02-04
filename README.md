@@ -51,4 +51,4 @@ note:- After changing configuration in josn file restart server manually
 - [x] Improve Search Functionality
 - [ ] Blueprint (Not yet)
 
-[Static FIles & ngrok](https://github.com/jakbin/flask-blog/staticFiles&Ngrok.md)
+[Static FIles & ngrok](staticFiles&Ngrok.md)
