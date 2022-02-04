@@ -12,7 +12,7 @@ from forms import ContactForm, AdminForm
 
 # After changes in config.json restart server manually
 with open('config.json', 'r') as c:
-    params = json.load(c)["params"] 
+    params = json.load(c)["params"]
 
 local_server = True
 app = Flask(__name__)
@@ -32,13 +32,11 @@ app.config.update(
 )
 
 app.config['SQLALCHEMY_DATABASE_URI'] = params['sqlite_uri']
-app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False
-    
+app.config['SQLALCHEMY_TRACK_MODIFICATION'] = False    
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 from models import *
-bcrypt = Bcrypt() 
-
+bcrypt = Bcrypt()
 
 @app.route("/")
 def home():
@@ -54,17 +52,17 @@ def home():
         prev = "#"
         next = "/?page="+ str(page+1)
         s_num = page
-        e_num = page + 3 
+        e_num = page + 3
     elif(page == last):
         prev = "/?page=" + str(page - 1)
         next = "#"
         s_num = page - 2
-        e_num = last + 1 
+        e_num = last + 1
     else:
         prev = "/?page=" + str(page - 1)
         next = "/?page=" + str(page + 1)
-        s_num = page - 1 
-        e_num = page + 2 
+        s_num = page - 1
+        e_num = page + 2
 
     return render_template('index.html', params=params, posts = posts, prev=prev, next=next, page=page, last=last, s_num=s_num, e_num=e_num)
 
@@ -86,17 +84,19 @@ def contact():
 
 @app.route("/about")
 def about():
-    return render_template('about.html', params=params)   
-    
+    return render_template('about.html', params=params)
+
 @app.route("/search", methods = ['GET', 'POST'])
 def search():
     q = request.args.get('q')
     search = "%{0}%".format(q)
-    posts =  Posts.query.filter(Posts.title.like(search)).all()
+    postsTitle =  Posts.query.filter(Posts.title.like(search))
+    postsContent =  Posts.query.filter(Posts.content.like(search))
+    posts = postsTitle.union(postsContent).all()
     if posts == []:
         flash("Your seach query not found, try some diffrent word", "warning")
         return redirect((url_for('home')))
-    return render_template('search.html', params=params, posts = posts)        
+    return render_template('search.html', params=params, posts = posts)
 
 
 @app.route("/login", methods = ['GET', 'POST'])
@@ -120,7 +120,7 @@ def dashboard():
         return render_template('admin/dashboard.html', params = params, posts = posts) 
         
     session['url'] = request.path
-    return redirect(url_for('login'))   
+    return redirect(url_for('login'))
 
 @app.route("/logout")
 def logout():
@@ -170,7 +170,7 @@ def edit(sno):
         
         post = Posts.query.filter_by(sno=sno).first()
         return render_template('admin/edit.html', params=params,post=post, sno=sno)
-    abort(403)           
+    abort(403)
 
 def allowed_image(filename):
     if not "." in filename:
@@ -180,7 +180,7 @@ def allowed_image(filename):
     if ext.lower() in ALLOWED_EXTENSIONS:
         return True
     else:
-        return False   
+        return False
 
 @app.route("/upload", methods = ['POST'])
 def upload():
@@ -197,7 +197,7 @@ def upload():
             return redirect('/dashboard')
         else:
             abort(405)
-    abort(403)        
+    abort(403)
     
 @app.route("/msg", methods = ['GET', 'POST'])
 def msg():
@@ -217,7 +217,7 @@ def msgdelete(sno):
         current_ssession.commit()
         # flash('deleted successfully')
         return '1'
-    abort(403)  
+    abort(403)
     
 @app.errorhandler(404)
 def error_404(error):
