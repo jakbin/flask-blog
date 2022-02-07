@@ -14,6 +14,7 @@ note:- heroku does not detect changes in sqlite after restart. You need to use a
 Admin page at **/dashboard** 
 
 username : - admin
+
 password :- admin
 
 (**You must change it before deploy on server**)
